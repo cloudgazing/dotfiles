@@ -59,6 +59,9 @@ alias violenz='git rebase'
 #thefuck
 eval $(thefuck --alias)
 
+# homebrew
+export HOMEBREW_NO_ENV_HINTS=1
+
 # NVM 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -78,6 +81,3 @@ if [ -f '/Users/cloudgazing/Scripts/google-cloud-sdk/path.zsh.inc' ]; then . '/U
 
 # The next line enables shell command completion for gcloud.
 #if [ -f '/Users/cloudgazing/Scripts/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/cloudgazing/Scripts/google-cloud-sdk/completion.zsh.inc'; fi
-
-# homebrew
-export HOMEBREW_NO_ENV_HINTS=1

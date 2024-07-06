@@ -1,0 +1,81 @@
+{
+	"theme": "Dark Wave",
+
+	"base_keymap": "VSCode",
+
+	"features": {
+		"copilot": false,
+		"inline_completion_provider": "none"
+	},
+
+	"buffer_font_family": "SF Mono",
+	"buffer_font_size": 12,
+
+	"ui_font_family": "SF Pro",
+	"ui_font_size": 14,
+
+	"toolbar": {
+		"breadcrumbs": false,
+		"quick_actions": false,
+		"selections_menu": false
+	},
+
+	"scrollbar": {
+		"show": "system",
+		"cursors": false,
+		"git_diff": false
+	},
+
+	"scroll_beyond_last_line": "vertical_scroll_margin",
+
+	"inlay_hints": {
+		"enabled": true
+	},
+
+	"project_panel": {
+		"dock": "right"
+	},
+	"outline_panel": {
+		"button": false,
+		"dock": "right"
+	},
+	"collaboration_panel": {
+		"button": false,
+		"dock": "right"
+	},
+	"chat_panel": {
+		"button": false,
+		"dock": "right"
+	},
+	"notification_panel": {
+		"button": false,
+		"dock": "right"
+	},
+	"assistant": {
+		"enabled": false,
+		"button": false
+	},
+
+	"autosave": "on_window_change",
+
+	"tab_bar": {
+		"show_nav_history_buttons": false
+	},
+
+	"preferred_line_length": 120,
+
+	"hard_tabs": true,
+
+	"telemetry": {
+		"diagnostics": false,
+		"metrics": false
+	},
+
+	"terminal": {
+		"blinking": "on",
+		"button": false,
+		"toolbar": {
+			"title": false
+		}
+	}
+}
