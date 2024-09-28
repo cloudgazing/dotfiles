@@ -1,18 +1,22 @@
 {
-	"theme": "Dark Wave",
+	"theme": "Catppuccin Espresso (Blur)",
 
 	"base_keymap": "VSCode",
 
 	"features": {
-		"copilot": false,
 		"inline_completion_provider": "none"
 	},
 
 	"buffer_font_family": "SF Mono",
 	"buffer_font_size": 12,
+	"buffer_line_height": "standard",
 
 	"ui_font_family": "SF Pro",
 	"ui_font_size": 14,
+
+	"tab_size": 2,
+
+	"restore_on_startup": "last_workspace",
 
 	"toolbar": {
 		"breadcrumbs": false,
@@ -29,8 +33,18 @@
 	"scroll_beyond_last_line": "vertical_scroll_margin",
 
 	"inlay_hints": {
-		"enabled": true
+
 	},
+	
+	"languages": {
+		"Rust": {
+			"inlay_hints": {
+				"enabled": true
+			}
+		}
+	},
+	
+	// "language_servers": ["!biome"],
 
 	"project_panel": {
 		"dock": "right"
@@ -52,11 +66,16 @@
 		"dock": "right"
 	},
 	"assistant": {
-		"enabled": false,
-		"button": false
+		"default_model": {
+			"provider": "zed.dev",
+			"model": "claude-3-5-sonnet-20240620"
+		},
+		"version": "2",
+		"enabled": true,
+		"button": true
 	},
 
-	"autosave": "on_window_change",
+	"autosave": { "after_delay": { "milliseconds": 500 } },
 
 	"tab_bar": {
 		"show_nav_history_buttons": false
@@ -74,6 +93,7 @@
 	"terminal": {
 		"blinking": "on",
 		"button": false,
+		"line_height": "standard",
 		"toolbar": {
 			"title": false
 		}

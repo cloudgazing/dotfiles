@@ -1,11 +1,11 @@
-local wezterm = require 'wezterm'
+local wezterm = require('wezterm')
 
-local config = wezterm.config_builder()
+local config  = wezterm.config_builder()
 
 -- settings
-
 config.front_end = 'WebGpu'
 config.automatically_reload_config = false
+--
 
 -- color
 config.color_scheme = 'Apple System Colors'
@@ -17,30 +17,38 @@ config.colors = {
 		}
 	}
 }
+--
 
 -- font
 config.font = wezterm.font_with_fallback {
-  'SF Mono',
-  'Symbols Nerd Font',
+	'SF Mono',
+	'Symbols Nerd Font',
 }
 config.font_size = 12
+--
 
 -- window
-config.window_decorations = "RESIZE"
-config.window_background_opacity = 0.85
-config.macos_window_background_blur = 50
 config.initial_cols = 110
 config.initial_rows = 30
-config.tab_bar_at_bottom = true
 config.hide_tab_bar_if_only_one_tab = true
 config.show_new_tab_button_in_tab_bar = false
+config.tab_bar_at_bottom = true
+
+config.window_background_opacity = 0.85
+config.macos_window_background_blur = 50
 config.window_frame = {
 	inactive_titlebar_bg = 'none',
-	active_titlebar_bg = 'none',
+	active_titlebar_bg = 'none'
 }
+
+config.window_close_confirmation = 'NeverPrompt'
+config.window_decorations = 'RESIZE'
+--
 
 -- cursor
 config.default_cursor_style = 'BlinkingBar'
 config.cursor_blink_ease_in = 'Linear'
+--
 
 return config
+

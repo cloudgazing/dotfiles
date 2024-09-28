@@ -1,83 +1,105 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
+# Documentation: https://github.com/romkatv/zsh4humans/blob/v5/README.md.
 
-#added for vscode
-if [[ "$TERM_PROGRAM" == "vscode" ]]; then
-  ITERM_SHELL_INTEGRATION_INSTALLED="Yes"
-fi
+# Periodic auto-update on Zsh startup: 'ask' or 'no'.
+# You can manually run `z4h update` to update everything.
+zstyle ':z4h:' auto-update      'no'
+# Ask whether to auto-update this often; has no effect if auto-update is 'no'.
+zstyle ':z4h:' auto-update-days '28'
 
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# Keyboard type: 'mac' or 'pc'.
+zstyle ':z4h:bindkey' keyboard  'mac'
 
-source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+# Don't start tmux.
+zstyle ':z4h:' start-tmux       no
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# Mark up shell's output with semantic information.
+zstyle ':z4h:' term-shell-integration 'yes'
 
-# lol aliases
-alias wtf='dmesg'
-alias onoz='cat /var/log/errors.log'
-alias rtfm='man'
-alias :3='echo'
-alias visible='echo'
-alias invisible='cat'
-alias moar='more'
-alias tldr='less'
-alias alwayz='tail -f'
-alias icanhas='mkdir'
-alias gimmeh='touch'
-alias donotwant='rm'
-alias dowant='cp'
-alias gtfo='mv'
-alias nowai='chmod'
-alias hai='cd'
-alias iz='ls'
-alias plz='pwd'
-alias ihasbucket='df -h'
-alias inur='locate'
-alias iminurbase='finger'
-alias btw='nice'
-alias obtw='nohup'
-alias nomz='ps aux'
-alias nomnom='killall'
-alias byes='exit'
-alias cya='reboot'
-alias kthxbai='halt'
-alias pwned='ssh'
-alias hackzor='git init'
-alias rulz='git push'
-alias bringz='git pull'
-alias chicken='git add'
-alias oanward='git commit -m'
-alias ooanward='git commit -am'
-alias yolo='git commit -m "$(curl -s https://whatthecommit.com/index.txt)"'
-alias letcat='git checkout'
-alias violenz='git rebase'
+# Right-arrow key accepts one character ('partial-accept') from
+# command autosuggestions or the whole thing ('accept')?
+# zstyle ':z4h:autosuggestions' forward-char 'accept'
 
-#thefuck
-eval $(thefuck --alias)
+# Recursively traverse directories when TAB-completing files.
+zstyle ':z4h:fzf-complete' recurse-dirs 'no'
+zstyle ':z4h:*' fzf-flags --color=hl:63,hl+:63
 
-# homebrew
+# Enable direnv to automatically source .envrc files.
+zstyle ':z4h:direnv'         enable 'no'
+# Show "loading" and "unloading" notifications from direnv.
+zstyle ':z4h:direnv:success' notify 'no'
+
+# Enable ('yes') or disable ('no') automatic teleportation of z4h over
+# SSH when connecting to these hosts.
+# The default value if none of the overrides above match the hostname.
+zstyle ':z4h:ssh:*'                   enable 'no'
+
+# Send these files over to the remote host when connecting over SSH to the
+# enabled hosts.
+# zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' '~/.env.zsh'
+
+# Clone additional Git repositories from GitHub.
+#
+# This doesn't do anything apart from cloning the repository and keeping it
+# up-to-date. Cloned files can be used after z4h init.
+# z4h install command here
+
+# Install or update core components (fzf, zsh-autosuggestions, etc.) and
+# initialize Zsh. After this point console I/O is unavailable until Zsh
+# is fully initialized. Everything that requires user interaction or can
+# perform network I/O must be done above. Everything else is best done below.
+z4h init || return
+
+# Extend PATH.
+# path=(~/bin $path)
+
+# Export environment variables.--
+export DO_NOT_TRACK=1
 export HOMEBREW_NO_ENV_HINTS=1
 
-# NVM 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# # NVM
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# #[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
+# # bun
+export BUN_INSTALL="$HOME/.local/share/bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-# bun completions
-#[ -s "/Users/cloudgazing/.bun/_bun" ] && source "/Users/cloudgazing/.bun/_bun"
+# # bun completions
+# #[ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
 
-# ruby
-export PATH="/opt/homebrew/opt/ruby/bin:/opt/homebrew/lib/ruby/gems/3.3.0/bin:$PATH"
+# # ruby
+# # export PATH="/opt/homebrew/opt/ruby/bin:/opt/homebrew/lib/ruby/gems/3.3.0/bin:$PATH"
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/cloudgazing/Scripts/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/cloudgazing/Scripts/google-cloud-sdk/path.zsh.inc'; fi
+# # The next line updates PATH for the Google Cloud SDK.
+# # if [ -f '$HOME/.local/share/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/.local/share/google-cloud-sdk/path.zsh.inc'; fi
 
-# The next line enables shell command completion for gcloud.
-#if [ -f '/Users/cloudgazing/Scripts/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/cloudgazing/Scripts/google-cloud-sdk/completion.zsh.inc'; fi
+# # The next line enables shell command completion for gcloud.
+# #if [ -f '$HOME/local/share/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/local/share/google-cloud-sdk/completion.zsh.inc'; fi
+
+# END Export environment variables.--
+
+# Source additional local files if they exist.
+# z4h source ~/.env.zsh
+
+# Use additional Git repositories pulled in with z4h install.
+# z4h source and load commands here
+
+# Define key bindings.
+
+# Autoload functions.
+
+# Define functions and completions.
+
+# Define named directories: ~w <=> Windows home directory on WSL.
+
+# Define aliases.
+
+# Add flags to existing aliases.
+
+# Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
+# setopt glob_dots     # no special treatment for file names with a leading dot
+# setopt no_auto_menu  # require an extra TAB press to open the completion menu
+
+# setopt EXTENDED_HISTORY # Write the history file in the ':start:elapsed;command' format.
+# setopt HIST_IGNORE_DUPS # Do not record an event that was just recorded again.
+
