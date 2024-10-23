@@ -103,3 +103,4 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # setopt EXTENDED_HISTORY # Write the history file in the ':start:elapsed;command' format.
 # setopt HIST_IGNORE_DUPS # Do not record an event that was just recorded again.
 
+[[ ! -v functions[command_not_found_handler] ]] || unfunction command_not_found_handler
